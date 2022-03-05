@@ -1,32 +1,20 @@
 package main;
 
+import java.util.stream.Collector;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println(makeComplement("ATTGC"));
-        System.out.println(makeComplement("GTAT"));
+        System.out.println(longest("xyaabbbccccdefww", "xxxxyyyyabklmopq"));
+        System.out.println(longest("abcdefghijklmnopqrstuvwxyz", "abcdefghijklmnopqrstuvwxyz"));
     }
 
-    public static String makeComplement(String dna) {
-        char[] chars = dna.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            chars[i] = replaceToOppoSite(chars[i]);
-        }
-        return String.valueOf(chars);
-    }
-
-    private static char replaceToOppoSite(char c) {
-        switch (c) {
-            case ('A'):
-                return 'T';
-            case ('T'):
-                return 'A';
-            case ('C'):
-                return 'G';
-            case ('G'):
-                return 'C';
-            default:
-                return 0;
-        }
+    public static String longest(String s1, String s2) {
+        String concat = s1 + s2;
+        return concat.chars().mapToObj(i -> (char) i).distinct().sorted().collect(Collector.of(
+                StringBuilder::new,
+                StringBuilder::append,
+                StringBuilder::append,
+                StringBuilder::toString));
     }
 }
 
