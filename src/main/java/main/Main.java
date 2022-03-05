@@ -4,17 +4,15 @@ import java.util.stream.Collector;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(longest("xyaabbbccccdefww", "xxxxyyyyabklmopq"));
-        System.out.println(longest("abcdefghijklmnopqrstuvwxyz", "abcdefghijklmnopqrstuvwxyz"));
+        System.out.println(findNextSquare(121));
+        System.out.println(findNextSquare(625));
+        System.out.println(findNextSquare(114));
     }
 
-    public static String longest(String s1, String s2) {
-        String concat = s1 + s2;
-        return concat.chars().mapToObj(i -> (char) i).distinct().sorted().collect(Collector.of(
-                StringBuilder::new,
-                StringBuilder::append,
-                StringBuilder::append,
-                StringBuilder::toString));
+    public static long findNextSquare(long sq) {
+        double sqrt = Math.sqrt(sq);
+        if (sqrt % 1 != 0) return -1;
+        return (long) Math.pow(sqrt + 1, 2);
     }
 }
 
