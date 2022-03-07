@@ -1,18 +1,21 @@
 package main;
 
-import java.util.stream.Collector;
-
 public class Main {
     public static void main(String[] args) {
-        System.out.println(findNextSquare(121));
-        System.out.println(findNextSquare(625));
-        System.out.println(findNextSquare(114));
+        System.out.println(getMiddle("test"));
+        System.out.println(getMiddle("testing"));
+        System.out.println(getMiddle("middle"));
+        System.out.println(getMiddle("A"));
     }
 
-    public static long findNextSquare(long sq) {
-        double sqrt = Math.sqrt(sq);
-        if (sqrt % 1 != 0) return -1;
-        return (long) Math.pow(sqrt + 1, 2);
+    public static String getMiddle(String word) {
+        final int length = word.length();
+        final int center = length / 2;
+        if (length % 2 == 0) {
+            return word.substring(center - 1, center + 1);
+        } else {
+            return word.substring(center, center+1);
+        }
     }
 }
 
