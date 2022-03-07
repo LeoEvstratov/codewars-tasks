@@ -1,21 +1,20 @@
 package main;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Optional;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println(getMiddle("test"));
-        System.out.println(getMiddle("testing"));
-        System.out.println(getMiddle("middle"));
-        System.out.println(getMiddle("A"));
+        System.out.println(findShort("bitcoin take over the world maybe who knows perhaps"));
+        System.out.println(findShort("turns out random test cases are easier than writing out basic ones"));
+        System.out.println(findShort("Let's travel abroad shall we"));
     }
 
-    public static String getMiddle(String word) {
-        final int length = word.length();
-        final int center = length / 2;
-        if (length % 2 == 0) {
-            return word.substring(center - 1, center + 1);
-        } else {
-            return word.substring(center, center+1);
-        }
+    public static int findShort(String s) {
+        final String[] words = s.split(" ");
+        final Optional<String> shortestWord = Arrays.stream(words).min(Comparator.comparingInt(String::length));
+        return shortestWord.map(String::length).orElse(0);
     }
 }
 
