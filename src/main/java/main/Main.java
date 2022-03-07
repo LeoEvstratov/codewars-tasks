@@ -1,20 +1,16 @@
 package main;
 
+import java.util.stream.IntStream;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println(getCount("iaeopuzq"));
-        System.out.println(getCount("etat"));
+        System.out.println(isTriangle(1, 2, 2));
+        System.out.println(isTriangle(7, 2, 2));
     }
 
-    public static int getCount(String str) {
-        final String vowels = "aeiou";
-
-        int vowelsCount = 0;
-        for (char c : str.toCharArray()) {
-            if (vowels.contains(String.valueOf(c))) vowelsCount++;
-        }
-
-        return vowelsCount;
+    public static boolean isTriangle(int a, int b, int c) {
+        final int[] sorted = IntStream.of(a, b, c).sorted().toArray();
+        return sorted[0] + sorted[1] > sorted[2];
     }
 }
 
