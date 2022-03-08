@@ -2,26 +2,22 @@ package main;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(accum("ZpglnRxqenU"));
-        System.out.println(accum("RqaEzty"));
-        System.out.println(accum("cwAt"));
+        System.out.println(makeReadable(0));
+        System.out.println(makeReadable(5));
+        System.out.println(makeReadable(60));
+        System.out.println(makeReadable(86399));
+        System.out.println(makeReadable(359999));
     }
 
-    public static String accum(String s) {
-        final char[] letters = s.toCharArray();
-        StringBuilder result = new StringBuilder();
+    public static String makeReadable(int seconds) {
 
-        for (int i = 0; i < letters.length; i++) {
-            result.append(String.valueOf(letters[i]).toUpperCase());
-            result.append(String.valueOf(letters[i]).toLowerCase().repeat(i));
-            if (i < letters.length - 1) result.append("-");
-        }
+        final int secondsInHour = 3600;
+        final int secondsInMinute = 60;
 
-        return result.toString();
+        final int hh = seconds / secondsInHour;
+        final int mm = (seconds - (hh * secondsInHour)) / secondsInMinute;
+        final int ss = seconds - (hh * secondsInHour) - (mm * secondsInMinute);
+
+        return String.format("%02d:%02d:%02d", hh, mm, ss);
     }
-
-//    accum("abcd") -> "A-Bb-Ccc-Dddd"
-//    accum("RqaEzty") -> "R-Qq-Aaa-Eeee-Zzzzz-Tttttt-Yyyyyyy"
-//    accum("cwAt") -> "C-Ww-Aaa-Tttt"
 }
-
