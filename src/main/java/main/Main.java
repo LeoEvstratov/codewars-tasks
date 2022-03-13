@@ -1,23 +1,23 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println(makeReadable(0));
-        System.out.println(makeReadable(5));
-        System.out.println(makeReadable(60));
-        System.out.println(makeReadable(86399));
-        System.out.println(makeReadable(359999));
+        System.out.println(arrayDiff(new int[]{1, 2}, new int[]{1}));
+        System.out.println(arrayDiff(new int[]{1, 2, 2, 2, 3}, new int[]{2}));
     }
 
-    public static String makeReadable(int seconds) {
+    public static int[] arrayDiff(int[] a, int[] b) {
+        final List<Integer> bList = Arrays.stream(b).boxed().collect(Collectors.toList());
 
-        final int secondsInHour = 3600;
-        final int secondsInMinute = 60;
+        final List<Integer> result = Arrays.stream(a).boxed()
+                .filter(i -> !bList.contains(i))
+                .collect(Collectors.toList());
 
-        final int hh = seconds / secondsInHour;
-        final int mm = (seconds - (hh * secondsInHour)) / secondsInMinute;
-        final int ss = seconds - (hh * secondsInHour) - (mm * secondsInMinute);
-
-        return String.format("%02d:%02d:%02d", hh, mm, ss);
+        return result.stream().mapToInt(Integer::intValue).toArray();
     }
 }
