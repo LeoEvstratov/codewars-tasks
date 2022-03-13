@@ -2,14 +2,21 @@ package main;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(createPhoneNumber(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 0}));
+        System.out.println(isPrime(73));
+        System.out.println(isPrime(2));
+        System.out.println(isPrime(75));
+        System.out.println(isPrime(1));
+        System.out.println(isPrime(-1));
+        System.out.println(isPrime(-5));
     }
 
-    public static String createPhoneNumber(int[] numbers) {
-        StringBuilder stringNumbers = new StringBuilder();
-        for (int i : numbers) {
-            stringNumbers.append(i);
+    public static boolean isPrime(int num) {
+        if (num < 2) return false;
+
+        final int sqrt = (int) Math.sqrt(num);
+        for (int i = sqrt; i > 1; i--) {
+            if (num % i == 0) return false;
         }
-        return String.format("(%s) %s-%s", stringNumbers.substring(0, 3), stringNumbers.substring(3, 6), stringNumbers.substring(6));
+        return true;
     }
 }
