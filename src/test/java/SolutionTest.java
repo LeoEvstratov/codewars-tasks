@@ -1,35 +1,39 @@
-import main.User;
+import main.Main;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SolutionTest {
     @Test
-    void testSomething() {
-        final User user = new User();
-        assertEquals(-8, user.rank);
-        assertEquals(0, user.progress);
-        assertEquals(-8, user.rank);
-        user.incProgress(-7);
-        assertEquals(10, user.progress);
-        user.incProgress(-5);
-        assertEquals(0, user.progress);
-        assertEquals(-7, user.rank);
-    }
+    void exampleTest() {
+        int[][] sudoku = {
+                {5, 3, 4, 6, 7, 8, 9, 1, 2},
+                {6, 7, 2, 1, 9, 5, 3, 4, 8},
+                {1, 9, 8, 3, 4, 2, 5, 6, 7},
+                {8, 5, 9, 7, 6, 1, 4, 2, 3},
+                {4, 2, 6, 8, 5, 3, 7, 9, 1},
+                {7, 1, 3, 9, 2, 4, 8, 5, 6},
+                {9, 6, 1, 5, 3, 7, 2, 8, 4},
+                {2, 8, 7, 4, 1, 9, 6, 3, 5},
+                {3, 4, 5, 2, 8, 6, 1, 7, 9}
+        };
+        assertTrue(Main.check(sudoku));
 
-    @Test
-    void testSomeLevelsUp() {
-        final User user = new User();
-        user.incProgress(1);
-        assertEquals(-2, user.rank);
-    }
+        sudoku[0][0]++;
+        sudoku[1][1]++;
+        sudoku[0][1]--;
+        sudoku[1][0]--;
 
-    @Test
-    void testNearNullValues() {
-        final User user = new User();
-        user.rank = 7;
-        user.progress = 99;
-        user.incProgress(8);
-        assertEquals(0, user.progress);
+        assertFalse(Main.check(sudoku));
+
+        sudoku[0][0]--;
+        sudoku[1][1]--;
+        sudoku[0][1]++;
+        sudoku[1][0]++;
+
+        sudoku[4][4] = 0;
+
+        assertFalse(Main.check(sudoku));
     }
 }
