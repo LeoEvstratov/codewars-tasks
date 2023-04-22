@@ -1,39 +1,26 @@
-import main.Main;
+import main.Parser;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class SolutionTest {
+
+public class SolutionTest {
+
     @Test
-    void exampleTest() {
-        int[][] sudoku = {
-                {5, 3, 4, 6, 7, 8, 9, 1, 2},
-                {6, 7, 2, 1, 9, 5, 3, 4, 8},
-                {1, 9, 8, 3, 4, 2, 5, 6, 7},
-                {8, 5, 9, 7, 6, 1, 4, 2, 3},
-                {4, 2, 6, 8, 5, 3, 7, 9, 1},
-                {7, 1, 3, 9, 2, 4, 8, 5, 6},
-                {9, 6, 1, 5, 3, 7, 2, 8, 4},
-                {2, 8, 7, 4, 1, 9, 6, 3, 5},
-                {3, 4, 5, 2, 8, 6, 1, 7, 9}
-        };
-        assertTrue(Main.check(sudoku));
-
-        sudoku[0][0]++;
-        sudoku[1][1]++;
-        sudoku[0][1]--;
-        sudoku[1][0]--;
-
-        assertFalse(Main.check(sudoku));
-
-        sudoku[0][0]--;
-        sudoku[1][1]--;
-        sudoku[0][1]++;
-        sudoku[1][0]++;
-
-        sudoku[4][4] = 0;
-
-        assertFalse(Main.check(sudoku));
+    public void fixedTests() {
+        assertEquals(1 , Parser.parseInt("one"));
+        assertEquals(10 , Parser.parseInt("ten"));
+        assertEquals(20 , Parser.parseInt("twenty"));
+        assertEquals(40 , Parser.parseInt("forty"));
+        assertEquals(46 , Parser.parseInt("forty-six"));
+        assertEquals(246 , Parser.parseInt("two hundred forty-six"));
+        assertEquals(186 , Parser.parseInt("one hundred eighty-six"));
+        assertEquals(2247 , Parser.parseInt("two thousand two hundred forty-seven"));
+        assertEquals(22546 , Parser.parseInt("twenty-two thousand five hundred forty-six"));
+        assertEquals(483100 , Parser.parseInt("four hundred eighty-three thousand one hundred"));
+        assertEquals(483100 , Parser.parseInt("four hundred eighty-three thousand and hundred"));
+        assertEquals(783919 , Parser.parseInt("seven hundred eighty-three thousand nine hundred and nineteen"));
+        assertEquals(1000000 , Parser.parseInt("million"));
+        assertEquals(1000000 , Parser.parseInt("one million"));
     }
 }
